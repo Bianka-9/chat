@@ -34,6 +34,8 @@ logOut.onclick = ()=>{
 
 onAuthStateChanged(auth, user =>{
   if(user){
+    console.log(user)
+    loggedUser.token = user.accessToken
     loggedUser.displayName = user.displayName
     userInfo.innerHTML = user.displayName
   }else{
@@ -49,7 +51,9 @@ async function sendMessage(){
     message: newMessage.value
   }
 
-  const reposnse= await fetch(api,{
+  const ujCim=api+ `?auth=${loggedUser.token}`
+  console.log(ujCim)
+  const reposnse= await fetch(ujCim,{
     method:"POST",
     body: JSON.stringify(body)
   })

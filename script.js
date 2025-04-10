@@ -37,9 +37,11 @@ onAuthStateChanged(auth, user =>{
     console.log(user)
     loggedUser.token = user.accessToken
     loggedUser.displayName = user.displayName
-    userInfo.innerHTML = user.displayName
+    userInfo.innerHTML = user.displayName+"; "+loggedUser.token
   }else{
     userInfo.innerHTML = "Senki sincs belépve"
+    loggedUser.token =""
+    loggedUser.displayName =""
   }
 })
 
@@ -92,7 +94,7 @@ async function getMessages(){
       console.log(m)
       const div = document.createElement("div")
       div.className="message"
-      if (m.user=="Bianka") {
+      if (m.user==loggedUser.displayName) {
         div.classList.add("mymessage")
         m.user="Én"
       }
